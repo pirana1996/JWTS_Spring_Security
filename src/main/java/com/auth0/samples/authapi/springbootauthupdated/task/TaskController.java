@@ -1,5 +1,6 @@
 package com.auth0.samples.authapi.springbootauthupdated.task;
 
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Principal;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public List<Task> getTasks() {
+    public List<Task> getTasks(Principal principal) {
+        System.out.println(principal.getName());
         return taskRepository.findAll();
     }
 
